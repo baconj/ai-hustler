@@ -53,6 +53,7 @@ if st.button("Generate My $1k/mo Plan"):
             prompt = f"Prompt: '{idea.split('→')[0].strip()} for a {job} with {pain}'"
             st.code(prompt)
 
-        st.info("**Want my $1,200/mo affiliate system + bonus prompts?** DM **'HUSTLE'** on X!")
+        st.info("**Want my $1,200/mo affiliate system + bonus prompts?** DM **'HUSTLE'** on X: [**@JaimeBaconX**](https://x.com/jaimebaconx)")
     else:
         st.warning("Fill all 3 — this is *your* future.")
+
