@@ -16,44 +16,50 @@ if st.button("Generate My $1k/mo Plan"):
         st.success(f"Here’s your **personalized** plan, **{name}**!")
         st.balloons()
 
-        # === DYNAMIC PROMPTS BASED ON INPUT ===
         job_lower = job.lower()
+        pain_lower = pain.lower()
 
-        # Base templates
+        # Clean ideas (no ** in strings)
         ideas = [
-            f"**AI {job} Resume Roaster** → Turn your resume into a $500 freelance gig",
-            f"**{job} to Python/JS Converter** → Charge $50 per conversion",
-            f"**AI {job} Side Hustle Name Generator** → Sell names for $29 each",
-            f"**Sell {job}-Specific Prompt Packs** → $29 on Gumroad → $1k/mo",
-            f"**NEPQ DM Closer for {job}s** → 'What happens if you stay stuck?'"
+            f"AI {job} Resume Roaster - Turn resume into $500 gig",
+            f"{job} to Python/JS Converter - Charge $50 per job",
+            f"AI {job} Side Hustle Name Generator - Sell for $29",
+            f"Sell {job}-Specific Prompt Packs - $29 on Gumroad = $1k/mo",
+            f"NEPQ DM Closer for {job}s - 'What if you stay stuck?'"
         ]
 
-        # Personalize based on job
-        if "java" in job_lower or "dev" in job_lower or "programmer" in job_lower:
-            ideas[0] = f"**Java-to-AI Consultant** → Help companies migrate with AI"
-            ideas[1] = f"**Spring Boot → AI API Wrapper** → Sell for $99"
-        elif "teacher" in job_lower or "educator" in job_lower:
-            ideas[0] = f"**AI Lesson Plan Generator** → Sell to teachers for $19"
-            ideas[1] = f"**Quiz Maker Pro** → $49/school"
-        elif "market" in job_lower or "sales" in job_lower:
-            ideas[0] = f"**AI Cold Email Writer** → $99 per campaign"
-            ideas[1] = f"**LinkedIn Post Generator** → $29/mo"
+        # Personalize by job
+        if any(k in job_lower for k in ["java", "dev", "programmer"]):
+            ideas[0] = "Java-to-AI Consultant - Help migrate with AI"
+            ideas[1] = "Spring Boot to AI API Wrapper - Sell for $99"
+        elif any(k in job_lower for k in ["teacher", "educator"]):
+            ideas[0] = "AI Lesson Plan Generator - $19 per teacher"
+            ideas[1] = "Quiz Maker Pro - $49 per school"
+        elif any(k in job_lower for k in ["market", "sales"]):
+            ideas[0] = "AI Cold Email Writer - $99 per campaign"
+            ideas[1] = "LinkedIn Post Generator - $29/mo"
 
-        # Personalize based on pain
-        pain_lower = pain.lower()
+        # Bonus by pain
         if "time" in pain_lower:
-            ideas.append("**BONUS: 2-Hour AI Workflow** → Do in 1 evening")
+            ideas.append("BONUS: 2-Hour AI Workflow - Do it tonight")
         if "idea" in pain_lower:
-            ideas.append("**BONUS: 50 Viral Idea Prompts** → Copy-paste ready")
+            ideas.append("BONUS: 50 Viral Idea Prompts - Copy-paste")
 
-        # Show 5 random + personalized
+        # Show 5 ideas
         selected = random.sample(ideas[:5], 5)
         for i, idea in enumerate(selected, 1):
-            st.write(f"### {i}. {idea}")
-            prompt = f"Prompt: '{idea.split('→')[0].strip()} for a {job} with {pain}'"
+            title, desc = idea.split(" - ", 1) if " - " in idea else (idea, "")
+            st.write(f"### {i}. **{title}**")
+            if desc:
+                st.write(f"   {desc}")
+            prompt = f"Prompt: '{title.strip()}' for a {job} with '{pain}'"
             st.code(prompt)
 
-        st.info("**Want my $1,200/mo affiliate system + bonus prompts?** DM **'HUSTLE'** on X: [**@JaimeBaconX**](https://x.com/jaimebaconx)")
+        # Your handle here
+        st.info("Want my **$1,200/mo affiliate system + bonus prompts**? DM **'HUSTLE'** on X: [**@JaimeBaconX**](https://x.com/jaimebaconx)")
+
     else:
         st.warning("Fill all 3 — this is *your* future.")
 
+st.markdown("---")
+st.caption("Built by @JaimeBaconX — 40yo Java dev who was stuck. Now shipping.")
